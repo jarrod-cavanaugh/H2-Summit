@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jarrod Cavanaugh — H2 Leadership Summit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#12172B;
+    --paper:#FAF8F4;
+    --brass:#C9A15A;
+    --brass-dim:#9c7f47;
+    --risk:#B5432C;
+    --good:#4C7A5E;
+    --line:rgba(18,23,43,0.12);
+    --line-light:rgba(250,248,244,0.16);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:0 40px;}
+  h1,h2,h3{font-family:'Fraunces',serif;font-weight:600;margin:0;}
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--brass-dim);
+  }
+
+  /* HEADER */
+  header{background:var(--ink);color:var(--paper);padding:56px 0 64px;}
+  header .eyebrow{color:var(--brass);}
+  header h1{font-size:40px;line-height:1.15;margin-top:10px;color:var(--paper);}
+  header .role{font-family:'IBM Plex Sans';font-size:16px;color:rgba(250,248,244,0.7);margin-top:8px;}
+  header .meta{
+    display:flex;gap:28px;margin-top:32px;padding-top:24px;
+    border-top:1px solid var(--line-light);flex-wrap:wrap;
+  }
+  header .meta div{font-size:12.5px;color:rgba(250,248,244,0.65);}
+  header .meta b{display:block;color:var(--paper);font-size:14px;font-weight:600;margin-bottom:2px;}
+
+  /* RUNWAY */
+  .runway{position:relative;padding:56px 0 16px;}
+  .runway-line{
+    position:absolute;top:62px;left:40px;right:40px;height:1px;
+    background:linear-gradient(to right, transparent, var(--line) 4%, var(--line) 96%, transparent);
+  }
+  .runway-stops{display:flex;justify-content:space-between;gap:32px;}
+  .stop{text-align:center;width:33%;position:relative;max-width:260px;margin:0 auto;}
+  .stop .dot{
+    width:11px;height:11px;border-radius:50%;background:var(--paper);
+    border:2px solid var(--brass);margin:0 auto 22px;position:relative;z-index:2;
+  }
+  .stop.active .dot{background:var(--brass);}
+  .stop .label{font-family:'IBM Plex Mono';font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--brass-dim);}
+  .stop .sub{font-size:13px;color:#5b5f70;margin-top:8px;}
+
+  section{padding:56px 0;border-bottom:1px solid var(--line);}
+  section:last-of-type{border-bottom:none;}
+  .section-head{display:flex;align-items:baseline;gap:16px;margin-bottom:8px;}
+  .section-head h2{font-size:28px;}
+  .section-head .tag{font-family:'IBM Plex Mono';font-size:11px;color:var(--brass-dim);letter-spacing:0.08em;text-transform:uppercase;}
+  .section-intro{font-size:15px;color:#4a4e5e;max-width:700px;margin-top:6px;line-height:1.55;}
+
+  /* KPI STRIP */
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);margin-top:32px;border:1px solid var(--line);}
+  .kpi{background:var(--paper);padding:22px 18px;}
+  .kpi .num{font-family:'Fraunces',serif;font-size:30px;font-weight:600;line-height:1;}
+  .kpi .num.risk{color:var(--risk);}
+  .kpi .num.good{color:var(--good);}
+  .kpi .lbl{font-size:12px;color:#6a6e7c;margin-top:8px;line-height:1.4;}
+
+  .callout{
+    margin-top:28px;padding:20px 24px;background:rgba(201,161,90,0.09);
+    border-left:3px solid var(--brass);font-size:14.5px;line-height:1.6;color:#33364a;
+  }
+  .callout b{color:var(--ink);}
+
+  /* DEAL CARDS */
+  .deals{display:grid;gap:14px;margin-top:28px;}
+  .deal{
+    display:grid;grid-template-columns:170px 1fr 190px;gap:24px;
+    padding:22px 24px;border:1px solid var(--line);background:#fff;
+  }
+  .deal .name{font-family:'Fraunces',serif;font-size:19px;font-weight:600;}
+  .deal .val{font-family:'IBM Plex Mono';font-size:14px;color:var(--brass-dim);margin-top:4px;}
+  .deal .stage{
+    display:inline-block;margin-top:10px;font-size:11px;font-family:'IBM Plex Mono';
+    padding:3px 8px;border-radius:2px;letter-spacing:0.03em;
+  }
+  .stage.negotiation{background:rgba(76,122,94,0.14);color:var(--good);}
+  .stage.discovery{background:rgba(201,161,90,0.16);color:var(--brass-dim);}
+  .stage.hold{background:rgba(181,67,44,0.1);color:var(--risk);}
+  .deal .next-lbl{font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:#9a9dab;margin-bottom:6px;}
+  .deal .next{font-size:13.5px;line-height:1.55;color:#33364a;}
+  .deal .side{text-align:right;}
+  .deal .side .close-lbl{font-size:11px;color:#9a9dab;text-transform:uppercase;letter-spacing:0.08em;}
+  .deal .side .close-date{font-family:'IBM Plex Mono';font-size:14px;margin-top:4px;}
+  .deal .risk-flag{
+    margin-top:12px;display:inline-block;font-size:11px;color:var(--risk);
+    border:1px solid rgba(181,67,44,0.35);padding:3px 8px;border-radius:2px;
+  }
+
+  /* SHOW TABLE */
+  table{width:100%;border-collapse:collapse;margin-top:24px;font-size:14px;}
+  th{
+    text-align:left;font-family:'IBM Plex Mono';font-size:11px;text-transform:uppercase;
+    letter-spacing:0.06em;color:#9a9dab;font-weight:500;padding:10px 14px;border-bottom:1px solid var(--line);
+  }
+  td{padding:14px 14px;border-bottom:1px solid var(--line);vertical-align:top;}
+  tr:last-child td{border-bottom:none;}
+  td.num{font-family:'IBM Plex Mono';color:var(--brass-dim);}
+  .pill{font-family:'IBM Plex Mono';font-size:10.5px;padding:2px 7px;border-radius:2px;display:inline-block;}
+  .pill.live{background:rgba(76,122,94,0.14);color:var(--good);}
+  .pill.built{background:rgba(201,161,90,0.16);color:var(--brass-dim);}
+  .pill.target{background:rgba(18,23,43,0.06);color:#5b5f70;}
+
+  /* TARGET ACCOUNTS */
+  .rank-num{font-family:'Fraunces',serif;font-size:20px;color:var(--brass-dim);}
+  .acct-status{font-size:11px;font-family:'IBM Plex Mono';}
+  .acct-status.act{color:var(--good);}
+  .acct-status.rev{color:var(--risk);}
+  .acct-status.pro{color:var(--brass-dim);}
+
+  /* BLOCKERS */
+  .blockers{display:grid;gap:16px;margin-top:28px;}
+  .blocker{padding:20px 24px;border:1px solid var(--line);background:#fff;display:grid;grid-template-columns:1fr 2fr;gap:20px;}
+  .blocker .ask{font-weight:600;font-size:14.5px;}
+  .blocker .why{font-size:13.5px;color:#4a4e5e;line-height:1.55;}
+  .blocker .why b{color:var(--ink);}
+
+  /* FOOTER */
+  footer{background:var(--ink);color:rgba(250,248,244,0.75);padding:40px 0;font-size:12.5px;}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+  footer b{color:var(--paper);}
+
+  @media (max-width:720px){
+    .wrap{padding:0 20px;}
+    header h1{font-size:28px;}
+    .kpis{grid-template-columns:repeat(2,1fr);}
+    .deal{grid-template-columns:1fr;}
+    .deal .side{text-align:left;}
+    .blocker{grid-template-columns:1fr;}
+    .runway-stops{flex-direction:column;gap:20px;}
+    .runway-line{display:none;}
+    .stop{width:100%;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow">H2 Leadership Summit · Working Draft · Rev. Jul 9</div>
+    <h1>Jarrod Cavanaugh</h1>
+    <div class="role">Account Executive, Sales — where we were, where we are, where we're going</div>
+    <div class="meta">
+      <div><b>Open pipeline</b>$35.8M · 3 deals</div>
+      <div><b>H1 quota</b>$13.5M</div>
+      <div><b>Next review</b>Daily EOD through Fri 11:59pm → Jon</div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="runway">
+    <div class="runway-line"></div>
+    <div class="runway-stops">
+      <div class="stop active"><div class="dot"></div><div class="label">Where We Were</div><div class="sub">H1 · $0 closed</div></div>
+      <div class="stop active"><div class="dot"></div><div class="label">Where We Are</div><div class="sub">3 live deals, 3 shows</div></div>
+      <div class="stop active"><div class="dot"></div><div class="label">Where We're Going</div><div class="sub">H2 · top 10 targets</div></div>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="section-head"><h2>Where We Were</h2><span class="tag">H1 2026</span></div>
+    <p class="section-intro">Zero retail closed against a $13.5M quota — the headline number is bad. The read underneath it is more specific: this wasn't a pipeline that died, it's a pipeline that never got fed.</p>
+
+    <div class="kpis">
+      <div class="kpi"><div class="num risk">$0</div><div class="lbl">Retail closed, H1<br>0% of $13.5M quota</div></div>
+      <div class="kpi"><div class="num good">0%</div><div class="lbl">Stall rate<br>vs. 55–76% for peers</div></div>
+      <div class="kpi"><div class="num risk">−55%</div><div class="lbl">Team discovery YoY<br>42 held vs. 93 in H1'25</div></div>
+      <div class="kpi"><div class="num">$32.5M</div><div class="lbl">Combined unmet H1 quota<br>Jarrod + Adam, the two $0 AEs</div></div>
+    </div>
+
+    <div class="callout">
+      <b>The insight, not just the number:</b> a 0% stall rate means nothing in my book died of neglect — every deal that entered a stage kept moving or closed lost on a real reason. The constraint was never conversion; company-wide, every conversion rate improved YoY (Discovery→Won up 3.5x) while discovery volume collapsed 55%. That's a fed-funnel problem on top of a selling problem. I'm not asking to be measured on anything less than closed dollars — that's the job. What I am asking is for the effort to register: I'm actively building and running my own outreach right now — trade shows, sequences, direct prospecting — and it's already shown it can create deals; the ones that didn't convert closed lost for reasons outside my control, not for lack of trying. That work should factor into how H2 gets read, not replace the dollar number.
+    </div>
+
+    <div class="callout" style="margin-top:16px;">
+      <b>Proof point — VetriScience ($30M):</b> self-sourced from scratch. I built the case across their 1P position, the 3P path, and a full competitor analysis, and drove it all the way to Negotiation. They ultimately chose to stay with their current partner for familiarity — even though our pricing was meaningfully better. That's a real deal I created and closed lost on a relationship reason, not a price or effort reason.
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head"><h2>Where We Are</h2><span class="tag">Live pipeline · Jul 9</span></div>
+    <p class="section-intro">Three active deals, $35.8M combined. Every one of them is single-threaded — that's the risk sitting underneath all three, and it's the reason none of them should be read as safe.</p>
+
+    <div class="deals">
+      <div class="deal">
+        <div>
+          <div class="name">Dole</div>
+          <div class="val">$24.1M</div>
+          <span class="stage hold">On Hold — no near-term movement</span>
+        </div>
+        <div>
+          <div class="next-lbl">Status + next step</div>
+          <div class="next">Sol is treating us as a long-term "sounding board," not an active evaluation. Realistically dead until next year, and even then it's a tough fit for us — product type and margin structure work against the model. Keeping it open and maintained, but it carries no real H2 impact and shouldn't be counted on.</div>
+        </div>
+        <div class="side">
+          <div class="close-lbl">Realistic timing</div>
+          <div class="close-date">FY27+</div>
+        </div>
+      </div>
+
+      <div class="deal">
+        <div>
+          <div class="name">VERSARE</div>
+          <div class="val">$9.0M</div>
+          <span class="stage discovery">Discovery Meeting Held</span>
+        </div>
+        <div>
+          <div class="next-lbl">Status + next step</div>
+          <div class="next">A Salaria-sourced lead — sizeable products, admittedly outside our core ICP. Discovery call went well and the contact agreed to run a P&L, but despite multiple follow-ups I haven't received it; he's cited a team member leaving as the holdup. Not calling this dead, but if the P&L isn't in hand within the next 1–2 weeks, this moves to On Hold.</div>
+        </div>
+        <div class="side">
+          <div class="close-lbl">Decision point</div>
+          <div class="close-date">~2 wks</div>
+        </div>
+      </div>
+
+      <div class="deal">
+        <div>
+          <div class="name">Dabur</div>
+          <div class="val">$2.7M</div>
+          <span class="stage negotiation">Negotiation In Progress</span>
+        </div>
+        <div>
+          <div class="next-lbl">Status + next step</div>
+          <div class="next">Waiting on Mohit &amp; Dhaval to finalize their remaining items and confirm pricing on the 300ml hair oil SKU. Once pricing is in hand, we should be ready to move forward. Open concern: 300ml is now selling on Walmart, which will likely pull Amazon volume down — worth watching whether the account stays large enough to be worth the deal once that plays out.</div>
+        </div>
+        <div class="side">
+          <div class="close-lbl">Target close</div>
+          <div class="close-date">Jul 31</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-head" style="margin-top:44px;"><h2 style="font-size:20px;">Trade show engine — feeding H2</h2></div>
+    <table>
+      <tr><th>Show</th><th>Date</th><th>Status</th><th>Approach</th></tr>
+      <tr>
+        <td><b>Apex Summit</b><br><span style="color:#6a6e7c;font-size:12.5px;">CEO-targeted, feeds NACDS + SuperZoo</span></td>
+        <td class="num">Aug 6</td>
+        <td><span class="pill live">Sequences live</span></td>
+        <td>4-email sequence direct to brand CEOs; the anchor invite both other shows route into. <b>206 CEOs invited</b> so far. Live interest from the CEO of Waggin' Train ($8M) — waiting on his confirmation before pushing to Maria.</td>
+      </tr>
+      <tr>
+        <td><b>NACDS</b><br><span style="color:#6a6e7c;font-size:12.5px;">Boston</span></td>
+        <td class="num">TBD, Jul</td>
+        <td><span class="pill live">Meetings booking direct</span></td>
+        <td>51 brands / 26 parent companies in territory, booked through the show's own scheduler — no Salaria dependency.</td>
+      </tr>
+      <tr>
+        <td><b>SuperZoo</b><br><span style="color:#6a6e7c;font-size:12.5px;">Mandalay Bay, Las Vegas</span></td>
+        <td class="num">Aug 12–14</td>
+        <td><span class="pill live">Sequences sending</span></td>
+        <td>Second priority show, same Apex Summit tie-in.</td>
+      </tr>
+      <tr>
+        <td><b>NBJ Summit</b><br><span style="color:#6a6e7c;font-size:12.5px;">Terranea — not attending in person</span></td>
+        <td class="num">Late Jul</td>
+        <td><span class="pill built">Live, unmanned</span></td>
+        <td>Outreach is running without me on-site — need a same-week follow-through plan for anyone who responds during the show.</td>
+      </tr>
+    </table>
+    <div class="callout" style="margin-top:24px;">
+      <b>What this shows:</b> all four sequences are outreach I built and am running myself — trade shows, events, and general prospecting on top of my own account work. I'm not sitting back waiting on leads. That said, this is supplemental, not a substitute for a functioning top-of-funnel engine. Salaria was brought in specifically to deliver discovery meetings, and volume is down 55% YoY (42 vs. 93) — that's a fact, not a complaint. I'll keep generating what I can, but closing the volume gap for real needs a fix at the source — Salaria fixed, replaced, or supplemented — which I know Jon and the team are already working on.
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head"><h2>Where We're Going</h2><span class="tag">H2 2026</span></div>
+    <p class="section-intro">Top 10 accounts to get into for H2 — not the show lists, the accounts themselves. Three are live. Seven are deals I've already closed lost that carry real reopen signal in the notes and are too large to leave cold.</p>
+
+    <table>
+      <tr><th>#</th><th>Account</th><th>Value</th><th>Status</th><th>Why it's on this list</th></tr>
+      <tr><td class="rank-num">1</td><td><b>VERSARE</b></td><td class="num">$9.0M</td><td><span class="acct-status act">● Active — Discovery Held</span></td><td>Salaria-sourced, outside core ICP, but discovery went well. Contact owes us a P&L — decision point in the next 1–2 weeks on whether this stays active or moves to On Hold.</td></tr>
+      <tr><td class="rank-num">2</td><td><b>Dabur</b></td><td class="num">$2.7M</td><td><span class="acct-status act">● Active — Negotiation</span></td><td>Closest to the finish line; gated on pricing, not interest.</td></tr>
+      <tr><td class="rank-num">3</td><td><b>Lavazza</b></td><td class="num">$135.6M</td><td><span class="acct-status rev">● Reopen candidate</span></td><td>Closed lost, but last notes show Gaia was still actively coordinating internally — team was OOO, not dead. Largest single account in the book by far.</td></tr>
+      <tr><td class="rank-num">4</td><td><b>Augason Farms</b></td><td class="num">$20.0M</td><td><span class="acct-status rev">● Reopen candidate</span></td><td>Repeated ghosting makes this the longest shot in the reopen group, but the dollar value keeps it in the top 10.</td></tr>
+      <tr><td class="rank-num">5</td><td><b>Park Tool</b></td><td class="num">$12.3M rev.</td><td><span class="acct-status pro">● Relationship building</span></td><td>Multiple good conversations with the decision maker, real relationship built, strong ICP fit. Keep chipping away.</td></tr>
+      <tr><td class="rank-num">6</td><td><b>Chicco</b></td><td class="num">$115.8M rev.</td><td><span class="acct-status pro">● Relationship building</span></td><td>Good meeting with Sid at ABC Kids, but he's gone quiet since. Premium price point works economically for us — he's the door to the actual decision makers.</td></tr>
+      <tr><td class="rank-num">7</td><td><b>Death Wish Coffee</b></td><td class="num">$24.3M rev.</td><td><span class="acct-status pro">● Relationship building</span></td><td>Solid rapport built with Trey at Expo West. Strong brand fit — worth continuing to pursue.</td></tr>
+      <tr><td class="rank-num">8</td><td><b>Jocko Fuel</b></td><td class="num">$53.0M rev.</td><td><span class="acct-status pro">● Relationship building</span></td><td>Had a direct conversation with Jocko himself. Next step is getting tighter with whoever runs day-to-day ecomm.</td></tr>
+      <tr><td class="rank-num">9</td><td><b>Tillamook Country Smoker</b></td><td class="num">$15.1M rev.</td><td><span class="acct-status pro">● Relationship building</span></td><td>Good conversations so far. Strong ICP and price point fit — we already work with a comparable brand, which helps the pitch.</td></tr>
+      <tr><td class="rank-num">10</td><td><b>Waterloo Sparkling Water</b></td><td class="num">$11.4M rev.</td><td><span class="acct-status pro">● Relationship building</span></td><td>Good brand and price point, product's a bit heavy logistically. On the fence both times we've talked — needs continued relationship-building, not a hard push.</td></tr>
+    </table>
+    <div class="callout" style="margin-top:24px;">
+      Combined: <b>2 active deals ($11.7M)</b>, <b>2 reopen candidates ($155.6M)</b>, and <b>6 relationship-building prospects ($231.9M combined revenue, no deal yet)</b>. Action this week: move Lavazza and Augason Farms from Closed Lost into HubSpot's <i>Consider Re-Engaging</i> stage, and get the 6 prospecting accounts logged as deals so this pipeline shows up in the system, not just in this report.
+    </div>
+
+    <div class="section-head" style="margin-top:44px;"><h2 style="font-size:20px;">Blockers, bottlenecks, asks</h2></div>
+    <div class="blockers">
+      <div class="blocker">
+        <div class="ask">Top-of-funnel fix — Salaria, a new vendor, or whoever the team lands on</div>
+        <div class="why">Discovery volume is down 55% YoY team-wide. I'm generating what I can myself through outreach, trade shows, and events, but that's a supplement, not a source I can scale on my own while also carrying my accounts. This is the single biggest lever for H2 — already in motion with Jon's team, flagging it here for visibility.</div>
+      </div>
+      <div class="blocker">
+        <div class="ask">Weigh pipeline-creation activity alongside closed dollars</div>
+        <div class="why">Closed dollars should stay the primary measure — that's the job. But the trade show and outreach work I'm generating on my own should factor into how H2 progress gets read, especially while the top-of-funnel fix is in progress.</div>
+      </div>
+      <div class="blocker">
+        <div class="ask">Second contact on VERSARE and Dabur</div>
+        <div class="why">Both are single-threaded. Dole doesn't carry the same urgency given where it realistically sits, but VERSARE and Dabur are live enough that losing the one relationship on each would cost real pipeline.</div>
+      </div>
+      <div class="blocker">
+        <div class="ask">Email and chat access on phone — standing issue, not just for shows</div>
+        <div class="why">We're in sales — nights, weekends, and travel are when deals move, and not having real-time email and chat access on my phone is the tech debt most likely to cost a live deal the response time it needed, any week of the year.</div>
+      </div>
+      <div class="blocker">
+        <div class="ask">CRM hygiene — no contacts on most companies, plus duplicates</div>
+        <div class="why">HubSpot's gotten a lot better, but of the 2,375 companies in my territory, <b>1,612 (68%)</b> have zero contacts attached — every time I do outreach on my own, I'm hunting down a contact from scratch instead of pulling one from the record. There are also straight duplicates sitting in the system — Chicco alone has 3 separate company records. Both cost real time on top of the outreach itself.</div>
+      </div>
+      <div class="blocker">
+        <div class="ask">Commission payout clarity — visibility within 48 hours of a win</div>
+        <div class="why">Not blocking pipeline today, but becomes real the moment Dabur or VERSARE closes — want this settled before it's live money, not after.</div>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:32px;">
+      <b>Why this matters at the company level:</b> H2 needs $24.3M/month team-wide — roughly 2x H1's realized pace. Karsten and Exec-Led can't carry that alone; the plan depends on the $0 AEs producing, and producing requires pipeline that doesn't yet exist. I'm doing what's in my control — my own outbound, the reopen list above, and the trade show engine. What's not in my control is top-of-funnel volume at scale, and that's the piece that needs to move for H2 to be reachable.
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>Jarrod Cavanaugh · H2 Leadership Summit · Working draft, revised daily through Fri 11:59pm</div>
+    <div><b>Source:</b> live HubSpot pipeline (Jul 9) + Luminize PCC v14 Mid-Year Review</div>
+  </div>
+</footer>
+
+</body>
+</html>
